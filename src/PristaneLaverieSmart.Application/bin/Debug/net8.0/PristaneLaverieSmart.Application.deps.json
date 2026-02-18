@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "PristaneLaverieSmart.Application/1.0.0": {
+        "dependencies": {
+          "PristaneLaverieSmart.Domain": "1.0.0"
+        },
+        "runtime": {
+          "PristaneLaverieSmart.Application.dll": {}
+        }
+      },
+      "PristaneLaverieSmart.Domain/1.0.0": {
+        "runtime": {
+          "PristaneLaverieSmart.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PristaneLaverieSmart.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PristaneLaverieSmart.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

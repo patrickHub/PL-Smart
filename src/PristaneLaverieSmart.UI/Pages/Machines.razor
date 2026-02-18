@@ -1,0 +1,55 @@
+@page "/machines"
+@using System.Net.Http.Json
+
+<h3>Machines</h3>
+
+@if (_machines is null)
+{
+    <p>Loading...</p>
+}
+else if (_machines.Count == 0)
+{
+    <p>No machines yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var m in _machines)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.PricePerCycle</td>
+                <td>@m.Status</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<MachineVm>? _machines;
+
+    [Inject] IHttpClientFactory HttpClientFactory { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = HttpClientFactory.CreateClient("Api");
+        _machines = await http.GetFromJsonAsync<List<MachineVm>>("/api/machines");
+    }
+
+    private sealed class MachineVm
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = "";
+        public decimal PricePerCycle { get; set; }
+        public int Status { get; set; }
+    }
+}

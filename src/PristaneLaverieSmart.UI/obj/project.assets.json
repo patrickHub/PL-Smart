@@ -1,0 +1,115 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "PristaneLaverieSmart.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "PristaneLaverieSmart.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PristaneLaverieSmart.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PristaneLaverieSmart.Application.dll": {}
+        }
+      },
+      "PristaneLaverieSmart.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/PristaneLaverieSmart.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PristaneLaverieSmart.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PristaneLaverieSmart.Application/1.0.0": {
+      "type": "project",
+      "path": "../PristaneLaverieSmart.Application/PristaneLaverieSmart.Application.csproj",
+      "msbuildProject": "../PristaneLaverieSmart.Application/PristaneLaverieSmart.Application.csproj"
+    },
+    "PristaneLaverieSmart.Domain/1.0.0": {
+      "type": "project",
+      "path": "../PristaneLaverieSmart.Domain/PristaneLaverieSmart.Domain.csproj",
+      "msbuildProject": "../PristaneLaverieSmart.Domain/PristaneLaverieSmart.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "PristaneLaverieSmart.Application >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\pddjo\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\PristaneLaverieSmart.UI.csproj",
+      "projectName": "PristaneLaverieSmart.UI",
+      "projectPath": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\PristaneLaverieSmart.UI.csproj",
+      "packagesPath": "C:\\Users\\pddjo\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\pddjo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.Application\\PristaneLaverieSmart.Application.csproj": {
+              "projectPath": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.Application\\PristaneLaverieSmart.Application.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
