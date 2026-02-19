@@ -13,3 +13,4 @@ D:\Projects\PL-Smart\src\PristaneLaverieSmart.Application\obj\Debug\net8.0\Prist
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Application\obj\Debug\net8.0\refint\PristaneLaverieSmart.Application.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Application\obj\Debug\net8.0\PristaneLaverieSmart.Application.pdb
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Application\obj\Debug\net8.0\ref\PristaneLaverieSmart.Application.dll
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.Application\obj\Debug\net8.0\PristaneLaverieSmart.Application.sourcelink.json

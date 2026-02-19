@@ -17,3 +17,4 @@ D:\Projects\PL-Smart\src\PristaneLaverieSmart.Infrastructure\obj\Debug\net8.0\Pr
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Infrastructure\obj\Debug\net8.0\ref\PristaneLaverieSmart.Infrastructure.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Infrastructure\bin\Debug\net8.0\PristaneLaverieSmart.Infrastructure.runtimeconfig.json
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Infrastructure\obj\Debug\net8.0\PristaneLaverieSmart.Infrastructure.genruntimeconfig.cache
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.Infrastructure\obj\Debug\net8.0\PristaneLaverieSmart.Infrastructure.sourcelink.json
