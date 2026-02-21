@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ieiwB6gNV4Y=",
+  "dgSpecHash": "YtTDVtv6wxA=",
   "success": true,
   "projectFilePath": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.API\\PristaneLaverieSmart.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\pddjo\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
+    "C:\\Users\\pddjo\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.24\\microsoft.aspnetcore.openapi.8.0.24.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

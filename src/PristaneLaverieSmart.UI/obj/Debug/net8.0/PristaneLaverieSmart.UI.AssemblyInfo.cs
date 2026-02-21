@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PristaneLaverieSmart.UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30549f26508f0a4a66ce5c66ddd91f898016d920")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b2a754682d089fbc98cd142f2ea3f0d2b43015a")]
 [assembly: System.Reflection.AssemblyProductAttribute("PristaneLaverieSmart.UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PristaneLaverieSmart.UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

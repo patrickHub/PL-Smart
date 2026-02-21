@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "rDKpZNrvpyY=",
+  "dgSpecHash": "7McaM+IECAE=",
   "success": true,
   "projectFilePath": "D:\\Projects\\PL-Smart\\tests\\PristaneLaverieSmart.Application.Tests\\PristaneLaverieSmart.Application.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pddjo\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\pddjo\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\microsoft.net.test.sdk\\17.8.0\\microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "C:\\Users\\pddjo\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

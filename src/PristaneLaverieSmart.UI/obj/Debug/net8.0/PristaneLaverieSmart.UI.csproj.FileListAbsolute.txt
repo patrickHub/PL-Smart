@@ -34,3 +34,4 @@ D:\Projects\PL-Smart\src\PristaneLaverieSmart.UI\obj\Debug\net8.0\PristaneLaveri
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.UI\obj\Debug\net8.0\PristaneLaverieSmart.UI.genruntimeconfig.cache
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.UI\obj\Debug\net8.0\ref\PristaneLaverieSmart.UI.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.UI\obj\Debug\net8.0\PristaneLaverieSmart.UI.sourcelink.json
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.UI\bin\Debug\net8.0\FluentValidation.dll

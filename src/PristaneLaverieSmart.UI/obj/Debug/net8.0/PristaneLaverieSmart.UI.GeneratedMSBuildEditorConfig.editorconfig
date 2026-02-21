@@ -46,6 +46,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/PL-Smart/src/PristaneLaverieSmart.UI/Pages/Bookings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/PL-Smart/src/PristaneLaverieSmart.UI/Pages/Machines.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFjaGluZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

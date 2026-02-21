@@ -17,6 +17,33 @@ namespace PristaneLaverieSmart.Infrastructure.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.24");
 
+            modelBuilder.Entity("PristaneLaverieSmart.Domain.Entities.Booking", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("MachinedId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("StartTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("PristaneLaverieSmart.Domain.Entities.Machine", b =>
                 {
                     b.Property<Guid>("Id")

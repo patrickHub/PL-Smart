@@ -139,3 +139,5 @@ D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\bin\Debug\net8.0\tr\Microsoft.
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\obj\Debug\net8.0\PristaneLaverieSmart.API.sourcelink.json
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\bin\Debug\net8.0\FluentValidation.dll
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll

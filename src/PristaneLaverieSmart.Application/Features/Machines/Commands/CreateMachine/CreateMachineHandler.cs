@@ -1,21 +1,26 @@
+using FluentValidation;
 using PristaneLaverieSmart.Application.Abstractions.Persistence;
+// using PristaneLaverieSmart.Application.Common.Validation;
 using PristaneLaverieSmart.Domain.Entities;
+
 
 namespace PristaneLaverieSmart.Application.Features.Machines.Commands;
 
 public sealed class CreateMachineHandler
 {
-    IMachineRepository _repos;
+    private readonly IMachineRepository _repos;
+    private readonly IValidator<CreateMachineCommand> _validator;
 
-    public CreateMachineHandler(IMachineRepository repos) => _repos = repos;
+    public CreateMachineHandler(IMachineRepository repos, IValidator<CreateMachineCommand> validator)
+    {
+         _repos = repos;
+         _validator = validator;
+        
+    }
 
     public async Task<Guid> HandleAsync(CreateMachineCommand machineCommand, CancellationToken ct = default)
     {
-        if(string.IsNullOrWhiteSpace(machineCommand.Name))
-            throw new ArgumentException("Machine name is required");
-
-        if(machineCommand.PricePerCycle <= 0)
-            throw new ArgumentException("Price must be greater than zero");
+        await _validator.ValidateAndThrowAsync(machineCommand, ct);
             
         var machine = new Machine{
             Name = machineCommand.Name,

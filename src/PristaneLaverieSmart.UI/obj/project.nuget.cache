@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "EVMUfV1cJA8=",
+  "dgSpecHash": "C74lj2JSJYk=",
   "success": true,
   "projectFilePath": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\PristaneLaverieSmart.UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\pddjo\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512"
+  ],
   "logs": []
 }

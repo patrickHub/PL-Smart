@@ -3,6 +3,11 @@ using PristaneLaverieSmart.Infrastructure;
 using System.Text.Json.Serialization;
 using PristaneLaverieSmart.Application.Features.Machines.Queries;
 using PristaneLaverieSmart.Application.Features.Machines.Commands;
+using PristaneLaverieSmart.API.Middleware;
+using FluentValidation;
+using PristaneLaverieSmart.Application.Queries.GetAllBookings;
+using PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +32,16 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
+builder.Services.AddTransient<ExceptionHandlingMiddleware>(); // register our middleware
+builder.Services.AddValidatorsFromAssemblyContaining<CreateMachineCommandValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingCommandValidator>();
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("ui");
+app.UseMiddleware<ExceptionHandlingMiddleware>(); // enable our middleware
 
 app.MapGet("/api/machines", async (GetAllMachinesHandler handler, CancellationToken ct) =>
 {
@@ -44,5 +54,18 @@ app.MapPost("api/machines", async(CreateMachineCommand machineCommand, CreateMac
     var id = await handler.HandleAsync(machineCommand, ct);
     return Results.Created($"/api/machine/{id}", new {id});
 });
+
+app.MapGet("/api/bookings", async (GetAllBookingsHandler handler, CancellationToken ct) =>
+{
+    var bookings = await handler.HandleAsync(ct);
+    return Results.Ok(bookings);
+});
+
+app.MapPost("/api/bookings", async (CreateBookingCommand bookingCommand, CreateBookingCommandHandler handler, CancellationToken ct) =>
+{
+    var id = await handler.HandleAsync(bookingCommand, ct);
+    return Results.Created($"/api/bookings/{id}", new { id });
+});
+
 
 app.Run();

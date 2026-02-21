@@ -1,5 +1,3 @@
-using System.Data.Common;
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore;
 using PristaneLaverieSmart.Domain.Entities;
 
@@ -14,6 +12,7 @@ public class PristaneLaverieSmartDbContext: Microsoft.EntityFrameworkCore.DbCont
     }
 
     public DbSet<Machine> Machines => Set<Machine>();
+    public DbSet<Booking> Bookings => Set<Booking>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
