@@ -3,11 +3,11 @@ namespace PristaneLaverieSmart.Application.Common.Exceptions;
 
 public sealed class ValidationException : Exception
 {
-    public IDictionary<string, string[]> Error {get;}
+    public IDictionary<string, string[]> Errors {get;}
 
-    public ValidationException(IDictionary<string, string[]> error)
+    public ValidationException(IDictionary<string, string[]> errors)
         : base("One or More validation errors occured")
     {
-        Error = error;
+        Errors = errors;
     }
 }

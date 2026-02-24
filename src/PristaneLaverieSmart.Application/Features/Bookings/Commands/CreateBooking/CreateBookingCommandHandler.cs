@@ -1,44 +1,40 @@
 
 using FluentValidation;
+using MediatR;
 using PristaneLaverieSmart.Application.Abstractions.Persistence;
 using PristaneLaverieSmart.Domain.Entities;
 
 namespace PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 
-public sealed class CreateBookingCommandHandler
+public sealed class CreateBookingCommandHandler: IRequestHandler<CreateBookingCommand, Guid>
 {
     private readonly IBookingRepository _repoBooking;
     private readonly IMachineRepository _repoMachine;
-    private readonly IValidator<CreateBookingCommand> _validator;
 
     public CreateBookingCommandHandler(
         IBookingRepository repoBookings,
-        IMachineRepository repoMachines,
-        IValidator<CreateBookingCommand> validator)
+        IMachineRepository repoMachines)
     {
         _repoBooking = repoBookings;
         _repoMachine = repoMachines;
-        _validator = validator;
     }
 
-    public async Task<Guid> HandleAsync(CreateBookingCommand bookingCommand, CancellationToken ct = default)
+    public async Task<Guid> Handle(CreateBookingCommand request, CancellationToken ct = default)
     {
-
-        await _validator.ValidateAndThrowAsync(bookingCommand, ct);
 
         var allMachines = await _repoMachine.GetAllAsync(ct);
 
-        if(allMachines.All(m=>m.Id != bookingCommand.MachineId))
+        if(allMachines.All(m=>m.Id != request.MachineId))
         {
             throw new Common.Exceptions.NotFoundException("Machine not found");
         }
 
         Booking booking = new Booking
         {
-            MachinedId = bookingCommand.MachineId,
-            CustomerName = bookingCommand.CustomerName,
-            StartTime = bookingCommand.StartTime,
-            EndTime = bookingCommand.EndTime       
+            MachinedId = request.MachineId,
+            CustomerName = request.CustomerName,
+            StartTime = request.StartTime,
+            EndTime = request.EndTime       
         };
 
         await _repoBooking.AddAsync(booking, ct);

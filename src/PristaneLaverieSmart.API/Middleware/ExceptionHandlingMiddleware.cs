@@ -36,6 +36,19 @@ public sealed class ExceptionHandlingMiddleware : IMiddleware
                 )
             );
         }
+        catch (ValidationException ex)
+        {
+            await WriteAsync(
+                context,
+                HttpStatusCode.BadRequest,
+                new ApiErrorResponse(
+                    Title: "Validation failed",
+                    Status: StatusCodes.Status400BadRequest,
+                    Detail: ex.Message,
+                    Errors: new Dictionary<string, string[]>(ex.Errors),
+                    TraceId: context.TraceIdentifier
+                ));
+        }
         catch(NotFoundException ex)
         {
             await WriteAsync(
@@ -94,7 +107,7 @@ public sealed class ExceptionHandlingMiddleware : IMiddleware
                 new ApiErrorResponse(
                     Title: "Internal Server Error",
                     Status: StatusCodes.Status500InternalServerError,
-                    Detail: "An unexception error occured",
+                    Detail: ex.Message,
                     TraceId: context.TraceIdentifier
                 )
             );

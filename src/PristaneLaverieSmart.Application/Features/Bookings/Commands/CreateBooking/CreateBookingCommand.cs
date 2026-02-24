@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 
 public sealed record CreateBookingCommand(
@@ -5,6 +7,6 @@ public sealed record CreateBookingCommand(
     DateTimeOffset StartTime,
     DateTimeOffset EndTime,
     string CustomerName
-);
+): IRequest<Guid>;
 
 

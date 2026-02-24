@@ -16,11 +16,11 @@ public static class DependencyInjection
     {
         services.AddDbContext<PristaneLaverieSmartDbContext>(opt =>opt.UseSqlite(connectionString));
         services.AddScoped<IMachineRepository, MachineRepository>();
-        services.AddScoped<GetAllMachinesHandler>();
-        services.AddScoped<CreateMachineHandler>();
+        //services.AddScoped<GetAllMachinesHandler>();
+        //services.AddScoped<CreateMachineHandler>();
         services.AddScoped<IBookingRepository, BookingRepository>();
-        services.AddScoped<GetAllBookingsHandler>();
-        services.AddScoped<CreateBookingCommandHandler>();
+        //services.AddScoped<GetAllBookingsHandler>();
+        //services.AddScoped<CreateBookingCommandHandler>();
         return services;
     }
 }
