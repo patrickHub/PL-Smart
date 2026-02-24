@@ -74,3 +74,5 @@ app.MapPost("/api/bookings", async (CreateBookingCommand bookingCommand, IMediat
 
 
 app.Run();
+
+public partial class Program{ }

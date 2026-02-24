@@ -6,12 +6,12 @@ using PristaneLaverieSmart.Domain.Entities;
 
 namespace PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 
-public sealed class CreateBookingCommandHandler: IRequestHandler<CreateBookingCommand, Guid>
+public sealed class CreateBookingHandler: IRequestHandler<CreateBookingCommand, Guid>
 {
     private readonly IBookingRepository _repoBooking;
     private readonly IMachineRepository _repoMachine;
 
-    public CreateBookingCommandHandler(
+    public CreateBookingHandler(
         IBookingRepository repoBookings,
         IMachineRepository repoMachines)
     {

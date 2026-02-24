@@ -1,0 +1,12 @@
+{
+    "ConnectionString": {
+        "Default": "Data Source=pristaneLaverieSmart.db"
+    },
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetcore": "Warning"
+        }
+    },
+    "AllowedHosts": "*"
+}
