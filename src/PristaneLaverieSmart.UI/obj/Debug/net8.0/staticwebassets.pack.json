@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Id": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
       "Id": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },

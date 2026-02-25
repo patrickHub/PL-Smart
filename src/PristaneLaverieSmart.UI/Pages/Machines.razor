@@ -1,5 +1,8 @@
 @page "/machines"
 @using System.Net.Http.Json
+@using Microsoft.JSInterop
+@using PristaneLaverieSmart.Domain.Enums
+@inject ILogger<Machines> Logger;
 
 <h3>Machines</h3>
 
@@ -13,12 +16,17 @@ else if (_machines.Count == 0)
 }
 else
 {
+    <button class="btn btn-sm btn-outline-primary mb-3"
+        @onclick="LoadMachinesAsync">
+    Refresh
+</button>
     <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Status</th>
+                <th style="width: 220px;">Change status</th>
             </tr>
         </thead>
         <tbody>
@@ -27,22 +35,109 @@ else
             <tr>
                 <td>@m.Name</td>
                 <td>@m.PricePerCycle</td>
-                <td>@m.Status</td>
+                <td>
+                    <span class="status-badge @StatusCss(m.Status)">
+                        @m.Status
+                    </span>
+                </td>
+                <td>
+                    <select class="form-select form-select-sm"
+                        @bind="m.Status"
+                        @bind:event="onchange"
+                        @onchange="async e => await OnStatusChange(m.Id, e)">
+                    @foreach (var s in _allStatuses)
+                    {
+                        <option value="@s">@s</option>
+                    }
+                </select>
+                </td>
             </tr>
         }
         </tbody>
     </table>
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="alert alert-info mt-3">@_message</div>
+    }
 }
 
 @code {
     private List<MachineVm>? _machines;
+    private readonly MachineStatus[] _allStatuses = Enum.GetValues<MachineStatus>();
+    private string? _message;
 
     [Inject] IHttpClientFactory HttpClientFactory { get; set; } = default!;
+    [Inject] IJSRuntime JS { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadMachinesAsync();
+    }
+
+    private async Task LoadMachinesAsync()
+    {
         var http = HttpClientFactory.CreateClient("Api");
         _machines = await http.GetFromJsonAsync<List<MachineVm>>("/api/machines");
+    }
+
+    private static string StatusCss(string status)
+    {
+        // API returns status as string
+        // Map to css class
+        var normalized = status.Replace(" ", "").ToLowerInvariant();
+        return normalized switch
+        {
+            "available" => "status-available",
+            "running" => "status-running",
+            "outoforder" => "status-outoforder",
+            _ => ""
+        };
+    }
+
+    private async Task OnStatusChange(Guid machineId, ChangeEventArgs e)
+    {
+         Logger.LogWarning("OnStatusChange fired. MachineId={MachineId}", machineId);
+         Console.WriteLine($"[Machines] MachineId={machineId}");
+        _message = null;
+
+        if (e.Value is null) return;
+        var newStatusText = e.Value.ToString();
+
+        if (!Enum.TryParse<MachineStatus>(newStatusText, out var newStatus))
+        {
+            _message = "Invalid status selected.";
+            return;
+        }
+
+        var http = HttpClientFactory.CreateClient("Api");
+
+        //var res = await http.PostAsJsonAsync($"/api/machines/{machineId}/status", new { status = newStatus });
+
+        var res = await http.PostAsJsonAsync(
+    $"/api/machines/{machineId}/status",
+            new { status = newStatus.ToString() }
+        );
+
+        if (res.IsSuccessStatusCode)
+        {
+            // Refresh only that machine row using GET /api/machines/{id}
+            var updated = await http.GetFromJsonAsync<MachineVm>($"/api/machines/{machineId}");
+            if (updated is not null && _machines is not null)
+            {
+                var idx = _machines.FindIndex(x => x.Id == machineId);
+                if (idx >= 0) _machines[idx] = updated;
+            }
+            _message = "Status updated.";
+        }
+        else
+        {
+            // Try to show API error details
+            var body = await res.Content.ReadAsStringAsync();
+            _message = $"Failed to update status ({(int)res.StatusCode}). {body}";
+            // Refresh the full list to reset dropdown if needed
+            //await LoadMachinesAsync();
+        }
     }
 
     private sealed class MachineVm
@@ -50,6 +145,6 @@ else
         public Guid Id { get; set; }
         public string Name { get; set; } = "";
         public decimal PricePerCycle { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; } = ""; // string because API returns enum as string
     }
 }

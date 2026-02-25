@@ -20,4 +20,14 @@ public sealed class MachineRepository: IMachineRepository
         _db.Machines.Add(machine);
         await _db.SaveChangesAsync(ct);
     }
+
+    public async Task<Machine?> GetByIdAsync(Guid id, CancellationToken ct = default)
+    {
+       return await _db.Machines.FirstOrDefaultAsync(m => m.Id == id);
+    }
+    public async Task UpdateAsync(Machine machine, CancellationToken ct = default)
+    {
+        _db.Machines.Update(machine);
+        await _db.SaveChangesAsync(ct);
+    }
 }

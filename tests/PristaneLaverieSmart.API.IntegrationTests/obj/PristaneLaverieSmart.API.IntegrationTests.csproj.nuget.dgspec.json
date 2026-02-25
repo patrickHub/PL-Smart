@@ -369,6 +369,10 @@
               "target": "Package",
               "version": "[8.8.0, )"
             },
+            "Meziantou.Extensions.Logging.Xunit": {
+              "target": "Package",
+              "version": "[1.0.24, )"
+            },
             "Microsoft.AspNetCore.Mvc.Testing": {
               "target": "Package",
               "version": "[8.0.13, )"

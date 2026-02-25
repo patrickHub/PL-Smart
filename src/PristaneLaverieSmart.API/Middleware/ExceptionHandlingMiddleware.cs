@@ -99,6 +99,18 @@ public sealed class ExceptionHandlingMiddleware : IMiddleware
                     TraceId: context.TraceIdentifier
                 ));
         }
+        catch (BusinessRuleException ex)
+        {
+            await WriteAsync(
+                context,
+                HttpStatusCode.Conflict,
+                new ApiErrorResponse(
+                    Title: "Business Rule violation",
+                    Status: StatusCodes.Status409Conflict,
+                    Detail: ex.Message,
+                    TraceId: context.TraceIdentifier
+                ));
+        }
         catch(Exception ex)
         {
             await WriteAsync(

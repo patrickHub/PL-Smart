@@ -13,7 +13,7 @@ public class BookingsNotFoundTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task PostBookings_Should_Return404_WhenMachineDoesNotExist()
+    public async Task PostBookings_Should_Return409_WhenMachineDoesNotExist()
     {
         // Arrange
         var payload = new
@@ -28,12 +28,12 @@ public class BookingsNotFoundTests : IClassFixture<CustomWebApplicationFactory>
         var res = await _client.PostAsJsonAsync("/api/bookings", payload);
 
         // Assert
-        res.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        res.StatusCode.Should().Be(HttpStatusCode.Conflict);
 
         var error = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
         error.Should().NotBeNull();
-        error!.Status.Should().Be(404);
-        error.Title.Should().Contain("not found");
+        error!.Status.Should().Be(409);
+        error.Detail.Should().Contain("not found");
         //error.Title.Should().Contain("not found", StringComparison.OrdinalIgnoreCase);
         error.TraceId.Should().NotBeNullOrWhiteSpace();
     }

@@ -10,6 +10,10 @@ using PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 using MediatR;
 using PristaneLaverieSmart.Application.Common.Behaviors;
 using PristaneLaverieSmart.Application.Features.Bookings.Query;
+using PristaneLaverieSmart.Application.Features.Bookings.Commands;
+using PristaneLaverieSmart.API.Contracts;
+using SmartLaundry.Application.Features.Machines.Queries;
+using SmartLaundry.API.BackgroundServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,17 +33,23 @@ builder.Services.AddCors(opt =>
     );
 });
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.UseInlineDefinitionsForEnums();
+});
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>(); // register our middleware
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMachineCommand>());
 builder.Services.AddValidatorsFromAssemblyContaining<CreateMachineCommandValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingCommandValidator>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+builder.Services.AddHostedService<BookingStatusMonitor>();
 
 var app = builder.Build();
 
@@ -60,6 +70,22 @@ app.MapPost("api/machines", async(CreateMachineCommand machineCommand, IMediator
     return Results.Created($"/api/machine/{id}", new {id});
 });
 
+app.MapPost("/api/machines/{id:guid}/status", async (
+    Guid id,
+    SetMachineStatusRequest body,
+    IMediator mediator,
+    CancellationToken ct) =>
+{
+    await mediator.Send(new SetMachineStatusCommand(id, body.Status), ct);
+    return Results.NoContent();
+});
+
+app.MapGet("/api/machines/{id:guid}", async (Guid id, IMediator mediator, CancellationToken ct) =>
+{
+    var machine = await mediator.Send(new GetMachineByIdQuery(id), ct);
+    return Results.Ok(machine);
+});
+
 app.MapGet("/api/bookings", async (IMediator mediator, CancellationToken ct) =>
 {
     var bookings = await mediator.Send(new GetAllBookingQuerry(), ct);
@@ -70,6 +96,18 @@ app.MapPost("/api/bookings", async (CreateBookingCommand bookingCommand, IMediat
 {
     var id = await mediator.Send(bookingCommand, ct);
     return Results.Created($"/api/bookings/{id}", new { id });
+});
+
+app.MapPost("/api/bookings/{id:guid}/cancel", async (Guid id, IMediator mediator, CancellationToken ct) =>
+{
+    await mediator.Send(new CancelBookingCommand(id), ct);
+    return Results.NoContent();
+});
+
+app.MapPost("/api/bookings/{id:guid}/complete", async (Guid id, IMediator mediator, CancellationToken ct) =>
+{
+    await mediator.Send(new CompleteBookingCommand(id), ct);
+    return Results.NoContent();
 });
 
 

@@ -14,7 +14,7 @@ public class BookingApiTests : IClassFixture<CustomWebApplicationFactory>
     {
         var payload = new
         {
-            machineId = "",
+            machineId = "", // machine Id is invalid
             startTime = DateTimeOffset.UtcNow.AddHours(2),
             endTime = DateTimeOffset.UtcNow.AddHours(3),
             customerName = "Patrick"

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PristaneLaverieSmart.Domain.Entities;
 
 namespace PristaneLaverieSmart.Infrastructure.Persistence.DbContext;
@@ -16,6 +17,17 @@ public class PristaneLaverieSmartDbContext: Microsoft.EntityFrameworkCore.DbCont
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+         var dtoConverter = new ValueConverter<DateTimeOffset, DateTime>(
+            v => v.UtcDateTime,
+            v => new DateTimeOffset(DateTime.SpecifyKind(v, DateTimeKind.Utc)));
+
+        modelBuilder.Entity<Booking>()
+            .Property(b => b.StartTime)
+            .HasConversion(dtoConverter);
+
+        modelBuilder.Entity<Booking>()
+            .Property(b => b.EndTime)
+            .HasConversion(dtoConverter);
         modelBuilder.Entity<Machine>().HasData(
             new Machine
             {

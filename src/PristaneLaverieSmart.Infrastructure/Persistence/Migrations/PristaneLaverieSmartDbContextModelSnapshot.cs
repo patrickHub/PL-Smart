@@ -27,13 +27,13 @@ namespace PristaneLaverieSmart.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("EndTime")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("MachinedId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("StartTime")
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")

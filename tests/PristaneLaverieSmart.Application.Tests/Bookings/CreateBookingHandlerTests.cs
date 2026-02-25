@@ -17,8 +17,6 @@ public partial class CreateBookingHandlerTest
         var bookingRepos = new Mock<IBookingRepository>();
         var machineRepos = new Mock<IMachineRepository>();
 
-        machineRepos.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new List<Machine>()); // no machines
 
         var handler = new CreateBookingHandler(bookingRepos.Object, machineRepos.Object);
 
@@ -31,7 +29,7 @@ public partial class CreateBookingHandlerTest
 
         var act = () => handler.Handle(cmd, CancellationToken.None);
 
-        await act.Should().ThrowAsync<NotFoundException>()
+        await act.Should().ThrowAsync<BusinessRuleException>()
             .WithMessage("*Machine not found*");
     
         bookingRepos.Verify(r => r.AddAsync(It.IsAny<Booking>(), It.IsAny<CancellationToken>()), Times.Never);

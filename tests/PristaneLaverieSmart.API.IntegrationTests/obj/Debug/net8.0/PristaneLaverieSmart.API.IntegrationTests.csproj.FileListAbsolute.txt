@@ -480,3 +480,4 @@ D:\Projects\PL-Smart\tests\PristaneLaverieSmart.API.IntegrationTests\obj\Debug\n
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.API.IntegrationTests\obj\Debug\net8.0\PristaneLaverieSmart.API.IntegrationTests.pdb
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.API.IntegrationTests\obj\Debug\net8.0\PristaneLaverieSmart.API.IntegrationTests.genruntimeconfig.cache
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.API.IntegrationTests\obj\Debug\net8.0\ref\PristaneLaverieSmart.API.IntegrationTests.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.API.IntegrationTests\bin\Debug\net8.0\Meziantou.Extensions.Logging.Xunit.dll

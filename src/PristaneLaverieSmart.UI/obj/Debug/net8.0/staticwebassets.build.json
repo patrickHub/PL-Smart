@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JPA17j3ERhiyx198FpOVPcs6s6fjpTagW2JUuwt9EzQ=",
+  "Hash": "OmzISv0Ugz9VJLFjWcK5l4nSmdQ2X+LFmpIP75znyk4=",
   "Source": "PristaneLaverieSmart.UI",
   "BasePath": "_content/PristaneLaverieSmart.UI",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\wwwroot\\css\\site.css",
+      "SourceId": "PristaneLaverieSmart.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\wwwroot\\",
+      "BasePath": "_content/PristaneLaverieSmart.UI",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
       "Identity": "D:\\Projects\\PL-Smart\\src\\PristaneLaverieSmart.UI\\wwwroot\\favicon.png",

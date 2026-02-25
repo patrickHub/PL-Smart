@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using FluentAssertions;
 using Xunit;
 
@@ -24,7 +26,7 @@ public class BookingsEndToEndTests : IClassFixture<CustomWebApplicationFactory>
         public DateTimeOffset StartTime { get; set; }
         public DateTimeOffset EndTime { get; set; }
         public string CustomerName { get; set; } = "";
-        public string Status { get; set; } = "";
+        public int Status { get; set; } = 0;
     }
 
     [Fact]
@@ -68,7 +70,7 @@ public class BookingsEndToEndTests : IClassFixture<CustomWebApplicationFactory>
         bookings!.Should().Contain(b =>
             b.Id == bookingCreated.Id &&
             b.MachineId == machineCreated.Id &&
-            b.CustomerName == "Patrick E2E"
+            b.CustomerName == bookingPayload.customerName
         );
     }
 }

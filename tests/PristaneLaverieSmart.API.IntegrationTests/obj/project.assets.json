@@ -96,6 +96,23 @@
           "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "Meziantou.Extensions.Logging.Xunit/1.0.24": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.3",
+          "xunit.abstractions": "2.0.3"
+        },
+        "compile": {
+          "lib/net8.0/Meziantou.Extensions.Logging.Xunit.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Meziantou.Extensions.Logging.Xunit.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Testing/8.0.13": {
         "type": "package",
         "dependencies": {
@@ -515,7 +532,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.3": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -728,11 +745,11 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/10.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/10.0.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0",
-          "System.Diagnostics.DiagnosticSource": "10.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.3",
+          "System.Diagnostics.DiagnosticSource": "10.0.3"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
@@ -1829,7 +1846,7 @@
           }
         }
       },
-      "System.Diagnostics.DiagnosticSource/10.0.0": {
+      "System.Diagnostics.DiagnosticSource/10.0.3": {
         "type": "package",
         "compile": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -3154,6 +3171,30 @@
         "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
+    "Meziantou.Extensions.Logging.Xunit/1.0.24": {
+      "sha512": "UYTd9/026krGt9zq3qQNHPDF2yNYi3ZUEDu7DmwHmYjgxydppIw0NKGaosnEvFomivLf+5wq9Yozq1PWW7kNag==",
+      "type": "package",
+      "path": "meziantou.extensions.logging.xunit/1.0.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "icon.png",
+        "lib/net10.0/Meziantou.Extensions.Logging.Xunit.dll",
+        "lib/net10.0/Meziantou.Extensions.Logging.Xunit.xml",
+        "lib/net8.0/Meziantou.Extensions.Logging.Xunit.dll",
+        "lib/net8.0/Meziantou.Extensions.Logging.Xunit.xml",
+        "lib/net9.0/Meziantou.Extensions.Logging.Xunit.dll",
+        "lib/net9.0/Meziantou.Extensions.Logging.Xunit.xml",
+        "lib/netstandard2.0/Meziantou.Extensions.Logging.Xunit.dll",
+        "lib/netstandard2.0/Meziantou.Extensions.Logging.Xunit.xml",
+        "meziantou.extensions.logging.xunit.1.0.24.nupkg.sha512",
+        "meziantou.extensions.logging.xunit.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Mvc.Testing/8.0.13": {
       "sha512": "k+7BMJ0lTkNOnH4NfCVopsrO7sx28ZQGq1o6z66drVpLrrWjAO3G372OYrZ6qYxyufeOAMFDGqmLDrLU30QMlQ==",
       "type": "package",
@@ -3957,10 +3998,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.0": {
-      "sha512": "L3AdmZ1WOK4XXT5YFPEwyt0ep6l8lGIPs7F5OOBZc77Zqeo01Of7XXICy47628sdVl0v/owxYJTe86DTgFwKCA==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.3": {
+      "sha512": "bwGMrRcAMWx2s/RDgja97p27rxSz2pEQW0+rX5cWAUWVETVJ/eyxGfjAl8vuG5a+lckWmPIE+vcuaZNVB5YDdw==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/10.0.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/10.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3983,7 +4024,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.10.0.3.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -4260,10 +4301,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/10.0.0": {
-      "sha512": "FU/IfjDfwaMuKr414SSQNTIti/69bHEMb+QKrskRb26oVqpx3lNFXMjs/RC9ZUuhBhcwDM2BwOgoMw+PZ+beqQ==",
+    "Microsoft.Extensions.Logging.Abstractions/10.0.3": {
+      "sha512": "lxl0WLk7ROgBFAsjcOYjQ8/DVK+VMszxGBzUhgtQmAsTNldLL5pk9NG/cWTsXHq0lUhUEAtZkEE7jOGOA8bGKQ==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/10.0.0",
+      "path": "microsoft.extensions.logging.abstractions/10.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4327,7 +4368,7 @@
         "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.10.0.3.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -5740,10 +5781,10 @@
         "system.diagnostics.debug.nuspec"
       ]
     },
-    "System.Diagnostics.DiagnosticSource/10.0.0": {
-      "sha512": "0KdBK+h7G13PuOSC2R/DalAoFMvdYMznvGRuICtkdcUMXgl/gYXsG6z4yUvTxHSMACorWgHCU1Faq0KUHU6yAQ==",
+    "System.Diagnostics.DiagnosticSource/10.0.3": {
+      "sha512": "IuZXyF3K5X+mCsBKIQ87Cn/V4Nyb39vyCbzfH/AkoneSWNV/ExGQ/I0m4CEaVAeFh9fW6kp2NVObkmevd1Ys7A==",
       "type": "package",
-      "path": "system.diagnostics.diagnosticsource/10.0.0",
+      "path": "system.diagnostics.diagnosticsource/10.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5763,7 +5804,7 @@
         "lib/net9.0/System.Diagnostics.DiagnosticSource.xml",
         "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.dll",
         "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.xml",
-        "system.diagnostics.diagnosticsource.10.0.0.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512",
         "system.diagnostics.diagnosticsource.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -8675,6 +8716,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "FluentAssertions >= 8.8.0",
+      "Meziantou.Extensions.Logging.Xunit >= 1.0.24",
       "Microsoft.AspNetCore.Mvc.Testing >= 8.0.13",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "PristaneLaverieSmart.API >= 1.0.0",
@@ -8736,6 +8778,10 @@
           "FluentAssertions": {
             "target": "Package",
             "version": "[8.8.0, )"
+          },
+          "Meziantou.Extensions.Logging.Xunit": {
+            "target": "Package",
+            "version": "[1.0.24, )"
           },
           "Microsoft.AspNetCore.Mvc.Testing": {
             "target": "Package",

@@ -2,7 +2,7 @@ namespace PristaneLaverieSmart.Domain.Enums;
 
 public enum BookingStatus
 {
-    Received = 0,
-    Cancelled = 1,
-    Completed = 2
+    Received = 1,
+    Cancelled = 2,
+    Completed = 3
 }
