@@ -7,6 +7,9 @@ using PristaneLaverieSmart.Application.Features.Machines.Queries;
 using PristaneLaverieSmart.Application.Features.Machines.Commands;
 using PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 using PristaneLaverieSmart.Application.Queries.GetAllBookings;
+using PristaneLaverieSmart.Application.Common.Events;
+using PristaneLaverieSmart.Infrastructure.Events;
+using SmartLaundry.Infrastructure.Persistence.Repositories;
 
 namespace PristaneLaverieSmart.Infrastructure;
 
@@ -21,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<IBookingRepository, BookingRepository>();
         //services.AddScoped<GetAllBookingsHandler>();
         //services.AddScoped<CreateBookingCommandHandler>();
+        services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+        services.AddScoped<IMachineStatusAuditRepository, MachineStatusAuditRepository>();
         return services;
     }
 }

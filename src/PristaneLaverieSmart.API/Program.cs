@@ -14,6 +14,7 @@ using PristaneLaverieSmart.Application.Features.Bookings.Commands;
 using PristaneLaverieSmart.API.Contracts;
 using SmartLaundry.Application.Features.Machines.Queries;
 using SmartLaundry.API.BackgroundServices;
+using PristaneLaverieSmart.Application.Features.Machines.Queries.GetAllMachineAudits;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,7 +50,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateMachineCommandValidat
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingCommandValidator>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-builder.Services.AddHostedService<BookingStatusMonitor>();
+//builder.Services.AddHostedService<BookingStatusMonitor>();
 
 var app = builder.Build();
 
@@ -108,6 +109,12 @@ app.MapPost("/api/bookings/{id:guid}/complete", async (Guid id, IMediator mediat
 {
     await mediator.Send(new CompleteBookingCommand(id), ct);
     return Results.NoContent();
+});
+
+app.MapGet("/api/machines/{id:guid}/audits", async (Guid id, IMediator mediator, CancellationToken ct) =>
+{
+    var audits = await mediator.Send(new GetMachineAuditsQuery(id), ct);
+    return Results.Ok(audits);
 });
 
 

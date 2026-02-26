@@ -27,7 +27,7 @@ public sealed class CancelBookingHandler : IRequestHandler<CancelBookingCommand,
             throw new BusinessRuleException("Completed Booking can not be cancelled.");
         }
 
-        booking.Status = BookingStatus.Cancelled;
+        booking.Cancel();
 
         await _repos.UpdateAsync(booking, ct);
         return Unit.Value;

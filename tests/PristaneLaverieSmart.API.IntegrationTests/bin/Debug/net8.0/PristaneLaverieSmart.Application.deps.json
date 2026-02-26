@@ -130,6 +130,9 @@
         }
       },
       "PristaneLaverieSmart.Domain/1.0.0": {
+        "dependencies": {
+          "MediatR": "14.0.0"
+        },
         "runtime": {
           "PristaneLaverieSmart.Domain.dll": {
             "assemblyVersion": "1.0.0",

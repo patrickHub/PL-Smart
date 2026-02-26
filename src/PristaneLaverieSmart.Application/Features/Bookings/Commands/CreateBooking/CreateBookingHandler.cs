@@ -41,16 +41,8 @@ public sealed class CreateBookingHandler: IRequestHandler<CreateBookingCommand, 
             throw new Common.Exceptions.BusinessRuleException("Cannot create a booking: time slot overlaps with an existing booking.");
         }
 
-        Booking booking = new Booking
-        {
-            MachinedId = request.MachineId,
-            CustomerName = request.CustomerName,
-            StartTime = request.StartTime,
-            EndTime = request.EndTime       
-        };
-
-
-
+        var booking = Booking.Create(request.MachineId, request.StartTime, request.EndTime, request.CustomerName);
+        
         await _repoBooking.AddAsync(booking, ct);
         return booking.Id;
     }

@@ -26,7 +26,7 @@ public class BookingsEndToEndTests : IClassFixture<CustomWebApplicationFactory>
         public DateTimeOffset StartTime { get; set; }
         public DateTimeOffset EndTime { get; set; }
         public string CustomerName { get; set; } = "";
-        public int Status { get; set; } = 0;
+        public String Status { get; set; } = "";
     }
 
     [Fact]

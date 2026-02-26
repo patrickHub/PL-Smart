@@ -10,3 +10,4 @@ D:\Projects\PL-Smart\src\PristaneLaverieSmart.Domain\obj\Debug\net8.0\PristaneLa
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Domain\obj\Debug\net8.0\refint\PristaneLaverieSmart.Domain.dll
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Domain\obj\Debug\net8.0\PristaneLaverieSmart.Domain.pdb
 D:\Projects\PL-Smart\src\PristaneLaverieSmart.Domain\obj\Debug\net8.0\ref\PristaneLaverieSmart.Domain.dll
+D:\Projects\PL-Smart\src\PristaneLaverieSmart.Domain\obj\Debug\net8.0\PristaneLaverieSmart.Domain.csproj.AssemblyReference.cache

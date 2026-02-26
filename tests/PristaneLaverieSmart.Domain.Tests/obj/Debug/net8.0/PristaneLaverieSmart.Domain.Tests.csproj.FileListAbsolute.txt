@@ -101,3 +101,12 @@ D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\obj\Debug\net8.0\re
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\obj\Debug\net8.0\PristaneLaverieSmart.Domain.Tests.pdb
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\obj\Debug\net8.0\PristaneLaverieSmart.Domain.Tests.genruntimeconfig.cache
 D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\obj\Debug\net8.0\ref\PristaneLaverieSmart.Domain.Tests.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\MediatR.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Projects\PL-Smart\tests\PristaneLaverieSmart.Domain.Tests\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

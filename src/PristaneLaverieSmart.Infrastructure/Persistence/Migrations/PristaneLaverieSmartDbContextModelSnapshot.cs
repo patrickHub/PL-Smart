@@ -80,6 +80,29 @@ namespace PristaneLaverieSmart.Infrastructure.Persistence.Migrations
                             Status = 0
                         });
                 });
+
+            modelBuilder.Entity("PristaneLaverieSmart.Domain.Entities.MachineStatusAudit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("MachineId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("NewStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OldStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MachineStatusAudits");
+                });
 #pragma warning restore 612, 618
         }
     }

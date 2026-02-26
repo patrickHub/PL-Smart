@@ -28,7 +28,7 @@ public sealed class CompleteBookingHandler : IRequestHandler<CompleteBookingComm
         // if (DateTimeOffset.UtcNow < booking.EndTime)
         //     throw new BusinessRuleException("Booking cannot be completed before its EndTime.");
 
-        booking.Status = BookingStatus.Completed;
+        booking.Complete();
 
         await _repo.UpdateAsync(booking, ct);
         return Unit.Value;

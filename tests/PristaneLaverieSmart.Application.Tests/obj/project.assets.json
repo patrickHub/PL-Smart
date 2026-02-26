@@ -1947,6 +1947,9 @@
       "PristaneLaverieSmart.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MediatR": "14.0.0"
+        },
         "compile": {
           "bin/placeholder/PristaneLaverieSmart.Domain.dll": {}
         },

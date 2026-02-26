@@ -32,7 +32,7 @@ public sealed class SetMachineStatusHandler : IRequestHandler<SetMachineStatusCo
         if (hasActive && machine.Status == MachineStatus.OutOfOrder && request.Status != MachineStatus.OutOfOrder)
             throw new BusinessRuleException("Cannot change machine status while an active booking is running.");
 
-        machine.Status = request.Status;
+        machine.SetStatus(request.Status);
         await _machines.UpdateAsync(machine, ct);
 
         return Unit.Value;
