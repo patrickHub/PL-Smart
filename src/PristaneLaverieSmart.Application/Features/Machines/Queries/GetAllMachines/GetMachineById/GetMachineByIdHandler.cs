@@ -3,7 +3,7 @@ using PristaneLaverieSmart.Application.Abstractions.Persistence;
 using PristaneLaverieSmart.Application.Common.Exceptions;
 using PristaneLaverieSmart.Application.Features.Machines.Dtos;
 
-namespace SmartLaundry.Application.Features.Machines.Queries;
+namespace PristaneLaverieSmart.Application.Features.Machines.Queries;
 
 public sealed class GetMachineByIdHandler : IRequestHandler<GetMachineByIdQuery, MachineDto>
 {

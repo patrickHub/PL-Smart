@@ -1,26 +1,37 @@
-using System.Reflection.PortableExecutable;
 using PristaneLaverieSmart.Infrastructure;
 using System.Text.Json.Serialization;
 using PristaneLaverieSmart.Application.Features.Machines.Queries;
 using PristaneLaverieSmart.Application.Features.Machines.Commands;
 using PristaneLaverieSmart.API.Middleware;
 using FluentValidation;
-using PristaneLaverieSmart.Application.Queries.GetAllBookings;
 using PristaneLaverieSmart.Application.Features.Bookings.Commands.CreateBooking;
 using MediatR;
 using PristaneLaverieSmart.Application.Common.Behaviors;
 using PristaneLaverieSmart.Application.Features.Bookings.Query;
 using PristaneLaverieSmart.Application.Features.Bookings.Commands;
 using PristaneLaverieSmart.API.Contracts;
-using SmartLaundry.Application.Features.Machines.Queries;
-using SmartLaundry.API.BackgroundServices;
 using PristaneLaverieSmart.Application.Features.Machines.Queries.GetAllMachineAudits;
+using Serilog;
+using Serilog.Context;
+using PristaneLaverieSmart.Infrastructure.Persistence.DbContext;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseSerilog((ctx, services, cfg) =>
+{
+    cfg.ReadFrom.Configuration(ctx.Configuration)
+       .ReadFrom.Services(services)
+       .Enrich.FromLogContext()
+       .Enrich.WithEnvironmentName()
+       .Enrich.WithProcessId()
+       .Enrich.WithThreadId()
+       .WriteTo.Console();
+});
 
 var cs = builder.Configuration.GetConnectionString("Default") ?? "Data Source=pristaneLaverieSmart.db";
 builder.Services.addInfrastructure(cs);
@@ -45,19 +56,39 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>(); // register our middleware
+builder.Services.AddTransient<CorrelationIdMiddleware>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateMachineCommand>());
 builder.Services.AddValidatorsFromAssemblyContaining<CreateMachineCommandValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingCommandValidator>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<PristaneLaverieSmartDbContext>("database");
 
 //builder.Services.AddHostedService<BookingStatusMonitor>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PristaneLaverieSmartDbContext>();
+    db.Database.Migrate();   // ✅ creates DB + tables + applies migrations
+}
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("ui");
 app.UseMiddleware<ExceptionHandlingMiddleware>(); // enable our middleware
+app.Use(async (context, next) => // pushes correlation id into Serilog LogContex
+{
+    var cid = context.Items[CorrelationIdMiddleware.HeaderName]?.ToString() ?? "";
+    using (LogContext.PushProperty("CorrelationId", cid))
+    {
+        await next();
+    }
+});
+app.UseMiddleware<CorrelationIdMiddleware>();
+
+app.MapHealthChecks("/health"); // will return 200 if DB is reachable
 
 app.MapGet("/api/machines", async (IMediator mediator, CancellationToken ct) =>
 {
