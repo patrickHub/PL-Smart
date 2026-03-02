@@ -68,11 +68,11 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+/*using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<PristaneLaverieSmartDbContext>();
     db.Database.Migrate();   // ✅ creates DB + tables + applies migrations
-}
+}*/
 
 app.UseSwagger();
 app.UseSwaggerUI();
