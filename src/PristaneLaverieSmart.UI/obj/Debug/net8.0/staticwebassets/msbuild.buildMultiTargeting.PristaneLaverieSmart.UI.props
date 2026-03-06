@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\PristaneLaverieSmart.UI.props" />
-</Project>

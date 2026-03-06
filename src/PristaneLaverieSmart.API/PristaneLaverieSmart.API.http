@@ -1,6 +1,0 @@
-@PristaneLaverieSmart.API_HostAddress = http://localhost:5293
-
-GET {{PristaneLaverieSmart.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
