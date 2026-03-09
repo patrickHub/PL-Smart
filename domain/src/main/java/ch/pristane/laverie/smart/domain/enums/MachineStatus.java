@@ -3,14 +3,14 @@ package ch.pristane.laverie.smart.domain.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum BookingStatus {
-    RECEIVED("Received"),
-    CANCELLED("Cancelled"),
-    COMPLETED("Completed");
+public enum MachineStatus {
+    AVAILABLE("Available"),
+    RUNNING("Running"),
+    OUT_OF_ORDER("OutOfOrder");
 
     private final String value;
 
-    BookingStatus(String value) {
+    MachineStatus(String value) {
         this.value = value;
     }
 
@@ -20,13 +20,12 @@ public enum BookingStatus {
     }
 
     @JsonCreator
-    public static BookingStatus fromValue(String value) {
-        for (BookingStatus status : values()) {
+    public static MachineStatus fromValue(String value) {
+        for (MachineStatus status : values()) {
             if (status.value.equalsIgnoreCase(value)) {
                 return status;
             }
         }
-        throw new IllegalArgumentException("Invalid BookingStatus: " + value);
+        throw new IllegalArgumentException("Invalid MachineStatus: " + value);
     }
-
 }

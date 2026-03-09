@@ -3,7 +3,7 @@ package ch.pristane.laverie.smart.domain.entities;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import ch.pristane.laverie.smart.domain.MachineStatus;
+import ch.pristane.laverie.smart.domain.enums.MachineStatus;
 
 public class Machine {
     private UUID id;

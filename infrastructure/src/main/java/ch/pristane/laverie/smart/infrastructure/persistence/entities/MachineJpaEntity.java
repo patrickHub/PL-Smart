@@ -3,7 +3,7 @@ package ch.pristane.laverie.smart.infrastructure.persistence.entities;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import ch.pristane.laverie.smart.domain.MachineStatus;
+import ch.pristane.laverie.smart.domain.enums.MachineStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
