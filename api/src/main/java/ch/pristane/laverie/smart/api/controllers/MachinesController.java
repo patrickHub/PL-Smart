@@ -4,6 +4,7 @@ import ch.pristane.laverie.smart.api.contracts.CreateMachineRequest;
 import ch.pristane.laverie.smart.api.contracts.SetMachineStatusRequest;
 import ch.pristane.laverie.smart.application.commands.CreateMachineCommand;
 import ch.pristane.laverie.smart.application.dtos.MachineDto;
+import ch.pristane.laverie.smart.application.dtos.MachineStatusAuditDto;
 import ch.pristane.laverie.smart.application.services.MachineApplicationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +56,10 @@ public class MachinesController {
     ) {
         machineApplicationService.setMachineStatus(id, request.status());
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/audits")
+    public ResponseEntity<List<MachineStatusAuditDto>> getMachineAudits(@PathVariable UUID id) {
+        return ResponseEntity.ok(machineApplicationService.getMachineAudits(id));
     }
 }

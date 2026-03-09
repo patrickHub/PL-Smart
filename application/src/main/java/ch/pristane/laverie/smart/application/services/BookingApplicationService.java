@@ -9,8 +9,15 @@ import ch.pristane.laverie.smart.application.ports.BookingRepository;
 import ch.pristane.laverie.smart.application.ports.MachineRepository;
 import ch.pristane.laverie.smart.domain.entities.Booking;
 import ch.pristane.laverie.smart.domain.entities.Machine;
+import ch.pristane.laverie.smart.domain.entities.MachineStatusAudit;
 import ch.pristane.laverie.smart.domain.enums.BookingStatus;
 import ch.pristane.laverie.smart.domain.enums.MachineStatus;
+import ch.pristane.laverie.smart.domain.events.BookingCancelledEvent;
+import ch.pristane.laverie.smart.domain.events.BookingCompletedEvent;
+import ch.pristane.laverie.smart.domain.events.BookingCreatedEvent;
+import ch.pristane.laverie.smart.domain.events.MachineStatusChangedEvent;
+
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -23,12 +30,17 @@ public class BookingApplicationService {
 
     private final BookingRepository bookingRepository;
     private final MachineRepository machineRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public BookingApplicationService(BookingRepository bookingRepository, MachineRepository machineRepository) {
+    public BookingApplicationService(
+            BookingRepository bookingRepository,
+            MachineRepository machineRepository,
+            ApplicationEventPublisher eventPublisher
+    ) {
         this.bookingRepository = bookingRepository;
         this.machineRepository = machineRepository;
+        this.eventPublisher = eventPublisher;
     }
-
     public List<BookingDto> getAllBookings() {
         return bookingRepository.findAll()
                 .stream()
@@ -64,6 +76,15 @@ public class BookingApplicationService {
         );
 
         Booking saved = bookingRepository.save(booking);
+
+        eventPublisher.publishEvent(new BookingCreatedEvent(
+                saved.getId(),
+                saved.getMachineId(),
+                saved.getStartTime(),
+                saved.getEndTime(),
+                OffsetDateTime.now()
+        ));
+        
         return saved.getId();
     }
 
@@ -78,6 +99,13 @@ public class BookingApplicationService {
         }
 
         bookingRepository.save(booking);
+
+        eventPublisher.publishEvent(new BookingCancelledEvent(
+                booking.getId(),
+                booking.getMachineId(),
+                OffsetDateTime.now()
+        ));
+
         refreshMachineStatus(booking.getMachineId());
     }
 
@@ -92,6 +120,13 @@ public class BookingApplicationService {
         }
 
         bookingRepository.save(booking);
+        
+        eventPublisher.publishEvent(new BookingCompletedEvent(
+                booking.getId(),
+                booking.getMachineId(),
+                OffsetDateTime.now()
+        ));
+
         refreshMachineStatus(booking.getMachineId());
     }
 
@@ -110,9 +145,20 @@ public class BookingApplicationService {
                                 && !b.getStartTime().isAfter(OffsetDateTime.now())
                                 && b.getEndTime().isAfter(OffsetDateTime.now())
                 );
+        MachineStatus oldStatus = machine.getStatus();
+        MachineStatus newStatus = hasActiveBooking ? MachineStatus.RUNNING : MachineStatus.AVAILABLE;
 
-        machine.setStatus(hasActiveBooking ? MachineStatus.RUNNING : MachineStatus.AVAILABLE);
+        machine.setStatus(newStatus);
         machineRepository.save(machine);
+
+        if (oldStatus != newStatus) {
+            eventPublisher.publishEvent(new MachineStatusChangedEvent(
+                    machine.getId(),
+                    oldStatus,
+                    newStatus,
+                    OffsetDateTime.now()
+            ));
+        }
     }
 
     private void validate(CreateBookingCommand command) {

@@ -1,20 +1,25 @@
 package ch.pristane.laverie.smart.application.services;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import ch.pristane.laverie.smart.application.commands.CreateMachineCommand;
 import ch.pristane.laverie.smart.application.dtos.MachineDto;
+import ch.pristane.laverie.smart.application.dtos.MachineStatusAuditDto;
 import ch.pristane.laverie.smart.application.exceptions.BusinessRuleException;
 import ch.pristane.laverie.smart.application.exceptions.NotFoundException;
 import ch.pristane.laverie.smart.application.exceptions.ValidationException;
 import ch.pristane.laverie.smart.application.ports.BookingRepository;
 import ch.pristane.laverie.smart.application.ports.MachineRepository;
+import ch.pristane.laverie.smart.application.ports.MachineStatusAuditRepository;
 import ch.pristane.laverie.smart.domain.entities.Machine;
 import ch.pristane.laverie.smart.domain.enums.BookingStatus;
 import ch.pristane.laverie.smart.domain.enums.MachineStatus;
+import ch.pristane.laverie.smart.domain.events.MachineStatusChangedEvent;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,10 +27,19 @@ public class MachineApplicationService {
 
     private final MachineRepository machineRepository;
     private final BookingRepository bookingRepository;
+    private final MachineStatusAuditRepository machineStatusAuditRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public MachineApplicationService(MachineRepository machineRepository, BookingRepository bookingRepository) {
+    public MachineApplicationService(
+            MachineRepository machineRepository,
+            BookingRepository bookingRepository,
+            MachineStatusAuditRepository machineStatusAuditRepository,
+            ApplicationEventPublisher eventPublisher
+    ) {
         this.machineRepository = machineRepository;
         this.bookingRepository = bookingRepository;
+        this.machineStatusAuditRepository = machineStatusAuditRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public List<MachineDto> getAllMachines() {
@@ -73,8 +87,32 @@ public class MachineApplicationService {
             throw new BusinessRuleException("Cannot change machine status while an active booking is running.");
         }
 
+        MachineStatus oldStatus = machine.getStatus();
         machine.setStatus(newStatus);
         machineRepository.save(machine);
+
+        if (oldStatus != newStatus) {
+            eventPublisher.publishEvent(new MachineStatusChangedEvent(
+                    machine.getId(),
+                    oldStatus,
+                    newStatus,
+                    OffsetDateTime.now()
+            ));
+        }
+
+    }
+
+    public List<MachineStatusAuditDto> getMachineAudits(UUID machineId) {
+        return machineStatusAuditRepository.findByMachineId(machineId)
+                .stream()
+                .map(a -> new ch.pristane.laverie.smart.application.dtos.MachineStatusAuditDto(
+                        a.getId(),
+                        a.getMachineId(),
+                        a.getOldStatus(),
+                        a.getNewStatus(),
+                        a.getOccurredOn()
+                ))
+                .toList();
     }
 
     private void validate(CreateMachineCommand command) {
