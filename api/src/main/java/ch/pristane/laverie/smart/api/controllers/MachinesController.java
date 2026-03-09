@@ -1,6 +1,7 @@
 package ch.pristane.laverie.smart.api.controllers;
 
 import ch.pristane.laverie.smart.api.contracts.CreateMachineRequest;
+import ch.pristane.laverie.smart.api.contracts.SetMachineStatusRequest;
 import ch.pristane.laverie.smart.application.commands.CreateMachineCommand;
 import ch.pristane.laverie.smart.application.dtos.MachineDto;
 import ch.pristane.laverie.smart.application.services.MachineApplicationService;
@@ -45,5 +46,14 @@ public class MachinesController {
         return ResponseEntity
                 .created(URI.create("/api/machines/" + id))
                 .body(Map.of("id", id));
+    }
+    
+    @PostMapping("/{id}/status")
+    public ResponseEntity<Void> setMachineStatus(
+            @PathVariable UUID id,
+            @Valid @RequestBody SetMachineStatusRequest request
+    ) {
+        machineApplicationService.setMachineStatus(id, request.status());
+        return ResponseEntity.noContent().build();
     }
 }

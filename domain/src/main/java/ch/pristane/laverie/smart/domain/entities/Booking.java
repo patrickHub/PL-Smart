@@ -1,9 +1,9 @@
 package ch.pristane.laverie.smart.domain.entities;
 
+import ch.pristane.laverie.smart.domain.enums.BookingStatus;
+
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
-import ch.pristane.laverie.smart.domain.enums.BookingStatus;
 
 public class Booking {
     private UUID id;
@@ -36,6 +36,26 @@ public class Booking {
         );
     }
 
+    public void cancel() {
+        if (status == BookingStatus.CANCELLED) {
+            throw new IllegalStateException("Booking is already cancelled.");
+        }
+        if (status == BookingStatus.COMPLETED) {
+            throw new IllegalStateException("Completed bookings cannot be cancelled.");
+        }
+        status = BookingStatus.CANCELLED;
+    }
+
+    public void complete() {
+        if (status == BookingStatus.COMPLETED) {
+            throw new IllegalStateException("Booking is already completed.");
+        }
+        if (status == BookingStatus.CANCELLED) {
+            throw new IllegalStateException("Cancelled bookings cannot be completed.");
+        }
+        status = BookingStatus.COMPLETED;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -59,6 +79,4 @@ public class Booking {
     public BookingStatus getStatus() {
         return status;
     }
-
-    
 }

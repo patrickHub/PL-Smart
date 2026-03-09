@@ -43,4 +43,16 @@ public class BookingsController {
                 .created(URI.create("/api/bookings/" + id))
                 .body(Map.of("id", id));
     }
+
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<Void> cancelBooking(@PathVariable UUID id) {
+        bookingApplicationService.cancelBooking(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<Void> completeBooking(@PathVariable UUID id) {
+        bookingApplicationService.completeBooking(id);
+        return ResponseEntity.noContent().build();
+    }
 }

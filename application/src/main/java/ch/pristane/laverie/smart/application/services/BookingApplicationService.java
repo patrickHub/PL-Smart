@@ -9,6 +9,7 @@ import ch.pristane.laverie.smart.application.ports.BookingRepository;
 import ch.pristane.laverie.smart.application.ports.MachineRepository;
 import ch.pristane.laverie.smart.domain.entities.Booking;
 import ch.pristane.laverie.smart.domain.entities.Machine;
+import ch.pristane.laverie.smart.domain.enums.BookingStatus;
 import ch.pristane.laverie.smart.domain.enums.MachineStatus;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,54 @@ public class BookingApplicationService {
 
         Booking saved = bookingRepository.save(booking);
         return saved.getId();
+    }
+
+    public void cancelBooking(UUID bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new NotFoundException("Booking not found."));
+
+        try {
+            booking.cancel();
+        } catch (IllegalStateException ex) {
+            throw new BusinessRuleException(ex.getMessage());
+        }
+
+        bookingRepository.save(booking);
+        refreshMachineStatus(booking.getMachineId());
+    }
+
+    public void completeBooking(UUID bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new NotFoundException("Booking not found."));
+
+        try {
+            booking.complete();
+        } catch (IllegalStateException ex) {
+            throw new BusinessRuleException(ex.getMessage());
+        }
+
+        bookingRepository.save(booking);
+        refreshMachineStatus(booking.getMachineId());
+    }
+
+    private void refreshMachineStatus(UUID machineId) {
+        Machine machine = machineRepository.findById(machineId)
+                .orElseThrow(() -> new NotFoundException("Machine not found."));
+
+        if (machine.getStatus() == MachineStatus.OUT_OF_ORDER) {
+            return;
+        }
+
+        boolean hasActiveBooking = bookingRepository.findAll().stream()
+                .anyMatch(b ->
+                        b.getMachineId().equals(machineId)
+                                && b.getStatus() == BookingStatus.RECEIVED
+                                && !b.getStartTime().isAfter(OffsetDateTime.now())
+                                && b.getEndTime().isAfter(OffsetDateTime.now())
+                );
+
+        machine.setStatus(hasActiveBooking ? MachineStatus.RUNNING : MachineStatus.AVAILABLE);
+        machineRepository.save(machine);
     }
 
     private void validate(CreateBookingCommand command) {
