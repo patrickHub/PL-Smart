@@ -17,7 +17,17 @@ public static class DependencyInjection
 {
     public static IServiceCollection addInfrastructure(this IServiceCollection services, string connectionString)
     {
-        services.AddDbContext<PristaneLaverieSmartDbContext>(opt =>opt.UseSqlite(connectionString));
+        services.AddDbContext<PristaneLaverieSmartDbContext>(opt =>
+        {
+            if (connectionString.StartsWith("Host=", StringComparison.OrdinalIgnoreCase))
+            {
+                opt.UseNpgsql(connectionString);
+            }
+            else
+            {
+                opt.UseSqlite(connectionString);
+            }
+        });
         services.AddScoped<IMachineRepository, MachineRepository>();
         //services.AddScoped<GetAllMachinesHandler>();
         //services.AddScoped<CreateMachineHandler>();

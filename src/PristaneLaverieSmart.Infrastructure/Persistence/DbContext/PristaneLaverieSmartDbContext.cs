@@ -33,20 +33,6 @@ public class PristaneLaverieSmartDbContext: Microsoft.EntityFrameworkCore.DbCont
          modelBuilder.Entity<MachineStatusAudit>()
             .Property(b => b.OccurredOn)
             .HasConversion(dtoConverter);
-        modelBuilder.Entity<Machine>().HasData(
-            new Machine
-            {
-                Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
-                Name = "Washer #1",
-                PricePerCycle = 13.50m
-            },
-            new Machine
-            {
-                Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
-                Name = "Dryer #1",
-                PricePerCycle = 1.50m
-            }
-        );
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)

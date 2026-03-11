@@ -30,6 +30,13 @@ Both versions implement the same:
 
 This document compares both implementations.
 
+## Running the Application
+### Either .NET implementation or Java implementation
+
+From solution root:
+```bash
+docker-compose up --build
+```
 ---
 
 # 1. Project Overview

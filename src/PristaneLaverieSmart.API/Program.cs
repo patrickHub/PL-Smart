@@ -33,7 +33,7 @@ builder.Host.UseSerilog((ctx, services, cfg) =>
        .WriteTo.Console();
 });
 
-var cs = builder.Configuration.GetConnectionString("Default") ?? "Data Source=pristaneLaverieSmart.db";
+var cs = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.");
 builder.Services.addInfrastructure(cs);
 
 builder.Services.AddCors(opt =>
@@ -68,11 +68,11 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-/*using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<PristaneLaverieSmartDbContext>();
-    db.Database.Migrate();   // ✅ creates DB + tables + applies migrations
-}*/
+    db.Database.Migrate();   // creates DB + tables + applies migrations
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();

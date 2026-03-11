@@ -8,5 +8,18 @@
             "Microsoft.AspNetcore": "Warning"
         }
     },
-    "AllowedHosts": "*"
+    "AllowedHosts": "*",
+    "Serilog": {
+        "MinimumLevel": {
+        "Default": "Information",
+        "Override": {
+            "Microsoft.AspNetCore": "Warning",
+            "Microsoft.EntityFrameworkCore": "Warning"
+        }
+        },
+        "Enrich": [ "FromLogContext", "WithMachineName", "WithEnvironmentName", "WithProcessId", "WithThreadId" ],
+        "WriteTo": [
+        { "Name": "Console" }
+        ]
+    }
 }
