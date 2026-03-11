@@ -17,8 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
-class BookingsIntegrationTest {
+// @ActiveProfiles("test") as we want Testcontainer to override directly
+class BookingsIntegrationTest extends PostgresIntegrationTestBase {
 
     @Autowired
     MockMvc mockMvc;

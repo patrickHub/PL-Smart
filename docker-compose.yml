@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pristane-postgres
+    environment:
+      POSTGRES_DB: pristane_laverie_smart
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pristane_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pristane_laverie_smart"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pristane-java-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      DB_URL: jdbc:postgresql://postgres:5432/pristane_laverie_smart
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DRIVER: org.postgresql.Driver
+      HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      JWT_SECRET: change-this-secret-key-change-this-secret-key
+    ports:
+      - "8081:8080"
+
+volumes:
+  pristane_postgres_data:
