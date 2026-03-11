@@ -1,0 +1,60 @@
+@page "/bookings"
+@using System.Net.Http.Json
+
+<h3>Bookings</h3>
+
+@if (_bookings is null)
+{
+    <p>Loading...</p>
+}
+else if (_bookings.Count == 0)
+{
+    <p>No bookings yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>MachineId</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var b in _bookings)
+        {
+            <tr>
+                <td>@b.CustomerName</td>
+                <td>@b.MachineId</td>
+                <td>@b.StartTime</td>
+                <td>@b.EndTime</td>
+                <td>@b.Status</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<BookingVm>? _bookings;
+    [Inject] IHttpClientFactory HttpClientFactory { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = HttpClientFactory.CreateClient("Api");
+        _bookings = await http.GetFromJsonAsync<List<BookingVm>>("/api/bookings");
+    }
+
+    private sealed class BookingVm
+    {
+        public Guid Id { get; set; }
+        public Guid MachineId { get; set; }
+        public DateTimeOffset StartTime { get; set; }
+        public DateTimeOffset EndTime { get; set; }
+        public string CustomerName { get; set; } = "";
+        public string Status { get; set; } = "";
+    }
+}
